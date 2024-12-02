@@ -1,9 +1,1 @@
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-if not BOT_TOKEN:
-    raise ValueError("Необходимо указать токен бота в файле .env")
+BOT_TOKEN = "7911690257:AAFCRwMJGfagAjegpewSqK6I8194nvU2Dy0"

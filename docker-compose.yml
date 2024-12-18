@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: murzik
+      POSTGRES_PASSWORD: postgresql
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/main/resources:/docker-entrypoint-initdb.d
+    command: [ "postgres", "-c", "max_connections=300" ]
+
+volumes:
+  pgdata:

@@ -1,0 +1,25 @@
+CREATE TABLE t_user (
+    id SERIAL PRIMARY KEY,
+    telegram_id INTEGER UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    family_name VARCHAR(255) NOT NULL,
+    is_foreign BOOLEAN DEFAULT FALSE,
+    return_date DATE
+);
+
+CREATE TYPE deadline_type_enum AS ENUM ('exam', 'homework', 'project');
+
+CREATE TABLE t_deadline (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    deadline_type deadline_type_enum NOT NULL,
+    user_id INTEGER REFERENCES t_user (id) ON DELETE CASCADE
+);
+
+CREATE TABLE t_subject (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    user_id INTEGER REFERENCES t_user (id) ON DELETE CASCADE,
+    deadline_id INTEGER REFERENCES t_deadline (id) ON DELETE SET NULL
+);

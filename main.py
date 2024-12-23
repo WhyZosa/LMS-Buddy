@@ -16,13 +16,6 @@ bot = telebot.TeleBot(BOT_TOKEN)
 user_data = {}  # local dictionary for storing registration steps
 
 
-# def schedule_notifications(bot):
-#     schedule.every().day.at("08:00").do(send_notifications(bot, user_data))
-#     schedule.every().monday.at("10:00").do(remind_sop_dates(bot, user_data))
-#     schedule.every().day.at("08:00").do(send_deadline_reminders(bot))
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)
 
 from functools import partial
 

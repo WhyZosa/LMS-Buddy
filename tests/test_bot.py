@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
 from telebot.types import Message, CallbackQuery
-from bot import (
+from main import (
     bot,
     user_data,
     send_welcome,
@@ -19,6 +19,34 @@ from bot import (
     save_return_date,
 )
 from storage.models import DeadlineType
+
+from handlers.registration_handlers import register_registration_handlers
+from handlers.subject_deadline_handlers import register_subject_handlers
+from handlers.general_handlers import register_general_handlers
+from handlers.foreign_status_handlers import register_foreign_status_handlers
+from handlers.reminder_handlers import register_remind_handlers
+
+
+send_welcome = register_registration_handlers['send_welcome'](bot)
+
+
+handle_add_subject_message = register_subject_handlers['handle_add_subject_message'](bot)
+finish_add_subject = register_subject_handlers['finish_add_subject'](bot)
+handle_delete_deadline = register_subject_handlers['handle_delete_deadline'](bot)
+handle_add_deadline = register_subject_handlers['handle_add_deadline'](bot)
+ask_deadline_type = register_subject_handlers['ask_deadline_type'](bot)
+ask_deadline_date = register_subject_handlers['ask_deadline_date'](bot)
+finish_add_deadline = register_subject_handlers['finish_add_deadline'](bot)
+
+
+handle_back_to_main_menu = register_general_handlers['handle_back_to_main_menu'](bot)
+
+
+handle_foreign_status = register_foreign_status_handlers['handle_foreign_status'](bot)
+save_return_date = register_foreign_status_handlers['save_return_date'](bot)
+
+
+handle_show_all_reminders = register_remind_handlers['handle_show_all_reminders'](bot)
 
 
 @pytest.fixture
